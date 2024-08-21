@@ -1,12 +1,14 @@
 package com.arthursena.mongoSpring.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.arthursena.mongoSpring.domain.User;
 import com.arthursena.mongoSpring.repository.UserRepository;
+import com.arthursena.mongoSpring.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class UserService {
@@ -16,5 +18,10 @@ public class UserService {
 	
 	public List<User> findAll() {
 		return repo.findAll();
+	}
+	
+	public User findById(String id) {
+		Optional<User> user = repo.findById(id);
+		return user.orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado"));
 	}
 }
