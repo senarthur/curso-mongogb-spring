@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.arthursena.mongoSpring.domain.Post;
 import com.arthursena.mongoSpring.domain.User;
+import com.arthursena.mongoSpring.dto.AuthorDTO;
 import com.arthursena.mongoSpring.repository.PostRepository;
 import com.arthursena.mongoSpring.repository.UserRepository;
 
@@ -35,10 +36,11 @@ public class Instatiation implements CommandLineRunner {
 		User bianca = new User(null, "Bianca Martini", "bianca@gmail.com");
 		User cassia = new User(null, "Cássia Collen", "cassia@gmail.com");
 		
-		Post post1 = new Post(null, sdf.parse("21/03/2024"), "Bora bora São Paulo!", "Quem vem me encontrar em São Paulo?", bianca);
-		Post post2 = new Post(null, sdf.parse("18/05/2024"), "Bom dia pessoal!", "Nada melhor do que uma manhã dessas né?", bianca);
-		
 		userRepository.saveAll(Arrays.asList(alex, bianca, cassia));
+		
+		Post post1 = new Post(null, sdf.parse("21/03/2024"), "Bora bora São Paulo!", "Quem vem me encontrar em São Paulo?", new AuthorDTO(bianca));
+		Post post2 = new Post(null, sdf.parse("18/05/2024"), "Bom dia pessoal!", "Nada melhor do que uma manhã dessas né?", new AuthorDTO(bianca));
+		
 		postRepository.saveAll(Arrays.asList(post1, post2));
 	}
 
