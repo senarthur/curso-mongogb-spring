@@ -1,5 +1,6 @@
 package com.arthursena.mongoSpring.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +23,12 @@ public class PostService {
 	}
 	
 	public List<Post> findByTitle(String title) {
-		// return repo.findByTitleContainingIgnoreCase(title);
-		return repo.findByTitle(title);
+		// return repo.findByTitleContainingIgnoreCase(title); // Utilizando Query Methods
+		return repo.findByTitle(title); // Utilizando Query
+	}
+	
+	public List<Post> findByTextAndDate(String text, Date min, Date max) {
+		max = new Date(max.getTime() + 24 * 60 * 60 * 1000);
+		return repo.findByTextAndDate(text, min, max);
 	}
 }
